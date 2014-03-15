@@ -1,7 +1,7 @@
-package net.tiny.penguin.service;
+package net.tinypenguin.service;
 
-import net.tiny.penguin.dao.UserDao;
-import net.tiny.penguin.json.Query;
+import net.tinypenguin.dao.UserDao;
+import net.tinypenguin.json.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -16,7 +16,7 @@ public class KeywordServiceImpl implements KeywordService {
     public int register(String userId, Query query) {
         //TODO add user <-> queries
         //TODO search for other queries like this and return the result (count)
-        return 0;
+        return 42;
     }
 
 }

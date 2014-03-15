@@ -1,8 +1,7 @@
-package net.tiny.penguin.service;
+package net.tinypenguin.service;
 
-import net.tiny.penguin.json.Query;
+import net.tinypenguin.json.Query;
 
 public interface KeywordService {
-
     int register(String userId, Query query);
 }

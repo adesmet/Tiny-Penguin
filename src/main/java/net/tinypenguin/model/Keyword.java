@@ -1,9 +1,9 @@
-package net.tiny.penguin.model;
+package net.tinypenguin.model;
 
 
 import org.springframework.data.annotation.Id;
 
-public interface KeywordI {
+public interface Keyword {
 
     @Id
     public String getId();

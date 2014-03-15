@@ -1,4 +1,4 @@
-package net.tiny.penguin.model;
+package net.tinypenguin.model;
 
 
 import org.mongojack.ObjectId;
@@ -8,15 +8,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "keywords")
-public class Keywords {
+@Document(collection = "user")
+public class User {
 
     @ObjectId @Id
     private String id;
     @DBRef
-    private List<KeywordI> keywords;
+    private List<Keywords> keywords;
 
-    public Keywords() {
+    public User() {
     }
 
     public String getId() {
@@ -27,11 +27,11 @@ public class Keywords {
         this.id = id;
     }
 
-    public List<KeywordI> getKeywords() {
+    public List<Keywords> getKeywords() {
         return keywords;
     }
 
-    public void setKeywords(List<KeywordI> keywords) {
+    public void setKeywords(List<Keywords> keywords) {
         this.keywords = keywords;
     }
 }

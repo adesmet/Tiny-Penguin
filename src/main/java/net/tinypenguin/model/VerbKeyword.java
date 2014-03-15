@@ -1,11 +1,11 @@
-package net.tiny.penguin.model;
+package net.tinypenguin.model;
 
 import org.mongojack.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "verb")
-public class VerbKeyword implements KeywordI {
+public class VerbKeyword implements Keyword {
 
     @ObjectId @Id
     private String id;
