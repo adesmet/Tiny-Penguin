@@ -40,7 +40,6 @@ public class TinyController {
         User user = new User();
         user.setId("I've just done stuff to the db and the connection works");
         userDao.save(user);
-
         return userDao.findAll().get(0).getId();
     }
 }
