@@ -9,10 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+public interface UserDao extends MongoRepository<User, ObjectId> {
 
-public interface UserDao  {
-    //extends MongoRepository<User, ObjectId>
-//
-//    @Query(value = "{ ?0 {$in: keywords.$id} }")
-//    List<User> findUsersByKeywords(String keywordId);
+    @Query(value = "{ ?0 {$in: keywords.$id} }")
+    List<User> findUsersByKeywords(String keywordId);
 }

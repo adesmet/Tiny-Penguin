@@ -9,8 +9,8 @@ import javax.annotation.Resource;
 @Service
 public class KeywordServiceImpl implements KeywordService {
 
-    @Resource
-    private UserDao userDao;
+//    @Resource
+//    private UserDao userDao;
 
     @Override
     public int register(String userId, Query query) {
