@@ -13,8 +13,6 @@ public class User {
 
     @ObjectId @Id
     private String id;
-    @DBRef
-    private List<Keywords> keywords;
 
     public User() {
     }
@@ -25,13 +23,5 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public List<Keywords> getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(List<Keywords> keywords) {
-        this.keywords = keywords;
     }
 }

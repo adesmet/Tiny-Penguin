@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "noun")
 public class NounKeyword implements Keyword {
 
-    @ObjectId @Id
+    @ObjectId
+    @Id
     private String id;
 
     private String keyword;
@@ -29,5 +30,13 @@ public class NounKeyword implements Keyword {
 
     public void setKeyword(String keyword) {
         this.keyword = keyword;
+    }
+
+    @Override
+    public String toString() {
+        return "NounKeyword{" +
+                "id='" + id + '\'' +
+                ", keyword='" + keyword + '\'' +
+                '}';
     }
 }

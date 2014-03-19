@@ -11,7 +11,8 @@ import java.util.List;
 @Document(collection = "keywords")
 public class Keywords {
 
-    @ObjectId @Id
+    @ObjectId
+    @Id
     private String id;
     @DBRef
     private List<Keyword> keywords;
