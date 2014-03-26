@@ -1,24 +1,19 @@
 package net.tinypenguin.controller;
 
 
-import com.mongodb.DB;
+import net.tinypenguin.dao.EntryDao;
 import net.tinypenguin.dao.UserDao;
+import net.tinypenguin.dto.EntryDto;
 import net.tinypenguin.json.Query;
-import net.tinypenguin.model.Entry;
-import net.tinypenguin.model.Keywords;
-import net.tinypenguin.model.Tuple;
-import net.tinypenguin.model.User;
+import net.tinypenguin.model.*;
 import net.tinypenguin.service.KeywordService;
-import org.springframework.dao.DataAccessException;
-import org.springframework.dao.support.PersistenceExceptionTranslator;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -28,6 +23,9 @@ public class TinyController {
 
     @Resource
     UserDao userDao;
+
+    @Resource
+    EntryDao entryDao;
 
     @Resource
     KeywordService keywordService;
@@ -51,9 +49,8 @@ public class TinyController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/post")
-    public List<Entry> createTrackInJSON(Entry entry) {
-        System.out.println(entry);
-        // TODO: insert query, right now this is an echo
-        return Arrays.asList(entry);
+    public List<EntryDto> createTrackInJSON(EntryDto entryDto) {
+
+        return null;
     }
 }

@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * Created by Anthony on 19/03/14.
  */
 @Document(collection = "tuple")
-public class Tuple {
+public class Tuple{
     @ObjectId
     @Id
-    private String id;
+    private String id = new org.bson.types.ObjectId().toString();
 
     private VerbKeyword verb;
     private NounKeyword noun;

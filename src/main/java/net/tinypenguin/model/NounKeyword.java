@@ -9,7 +9,7 @@ public class NounKeyword implements Keyword {
 
     @ObjectId
     @Id
-    private String id;
+    private String id = new org.bson.types.ObjectId().toString();
 
     private String keyword;
 
@@ -34,9 +34,6 @@ public class NounKeyword implements Keyword {
 
     @Override
     public String toString() {
-        return "NounKeyword{" +
-                "id='" + id + '\'' +
-                ", keyword='" + keyword + '\'' +
-                '}';
+        return keyword;
     }
 }

@@ -12,7 +12,7 @@ import java.util.List;
 public class User {
 
     @ObjectId @Id
-    private String id;
+    private String id = new org.bson.types.ObjectId().toString();
 
     public User() {
     }

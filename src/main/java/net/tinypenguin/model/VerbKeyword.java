@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class VerbKeyword implements Keyword {
 
     @ObjectId @Id
-    private String id;
+    private String id = new org.bson.types.ObjectId().toString();
 
     private String keyword;
 
@@ -33,9 +33,6 @@ public class VerbKeyword implements Keyword {
 
     @Override
     public String toString() {
-        return "VerbKeyword{" +
-                "id='" + id + '\'' +
-                ", keyword='" + keyword + '\'' +
-                '}';
+        return keyword;
     }
 }
