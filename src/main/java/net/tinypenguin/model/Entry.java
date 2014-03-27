@@ -5,8 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.List;
 
 @Document(collection = "entry")
 public class Entry {
@@ -14,13 +13,13 @@ public class Entry {
     @Id
     private String id = new org.bson.types.ObjectId().toString();
 
-    private ArrayList<String> tuples = new ArrayList<String>();
+    private List<String> tuples = new ArrayList<String>();
 
-    private ArrayList<String> hashes = new ArrayList<String>();
+    private List<String> hashes = new ArrayList<String>();
 
     private User user;
 
-    private Location location;
+    private LocationPojo location;
 
     public Entry() {
     }
@@ -33,7 +32,7 @@ public class Entry {
         this.id = id;
     }
 
-    public ArrayList<String> getTuples() {
+    public List<String> getTuples() {
         return tuples;
     }
 
@@ -49,19 +48,19 @@ public class Entry {
         this.user = user;
     }
 
-    public Location getLocation() {
+    public LocationPojo getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationPojo location) {
         this.location = location;
     }
 
-    public ArrayList<String> getHashes() {
+    public List<String> getHashes() {
         return hashes;
     }
 
-    public void setHashes(ArrayList<String> hashes) {
+    public void setHashes(List<String> hashes) {
         this.hashes = hashes;
     }
 

@@ -12,5 +12,6 @@ import java.util.List;
 
 @Repository
 public interface EntryDao extends MongoRepository<Entry, ObjectId> {
-
+    @Query("{ 'hashes' : ?0 }")
+    List<Entry> findEntriesByHash(String hash);
 }

@@ -14,8 +14,7 @@ public class KeywordServiceImpl implements KeywordService {
 
     @Override
     public int register(String userId, Query query) {
-        //TODO add user <-> queries
-        //TODO search for other queries like this and return the result (count)
+
         return 42;
     }
 

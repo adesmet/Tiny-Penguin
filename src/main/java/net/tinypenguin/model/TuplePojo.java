@@ -1,10 +1,10 @@
-package net.tinypenguin.dto;
+package net.tinypenguin.model;
 
 /**
  * Created by Anthony on 26/03/14.
  */
-public class TupleDto implements Comparable<TupleDto> {
-    public TupleDto() {
+public class TuplePojo implements Comparable<TuplePojo> {
+    public TuplePojo() {
     }
 
     private String verb;
@@ -27,9 +27,18 @@ public class TupleDto implements Comparable<TupleDto> {
     }
 
     @Override
-    public int compareTo(TupleDto o) {
+    public int compareTo(TuplePojo o) {
         int verbCompare = o.getVerb().compareTo(verb);
         if(verbCompare == 0){
+            if(noun == null && o.getNoun() != null){
+                return -1;
+            }else if(noun != null && o.getNoun() == null){
+                return 1;
+            }else if(noun == null && o.getNoun() == null){
+                return 0;
+            }
+
+            // no nouns are null
             return -o.getNoun().compareTo(noun);
         }
         return -verbCompare;

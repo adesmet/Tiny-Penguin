@@ -1,7 +1,6 @@
 package net.tinypenguin.logic;
 
-import net.tinypenguin.dto.TupleDto;
-import net.tinypenguin.model.Tuple;
+import net.tinypenguin.model.TuplePojo;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
@@ -10,22 +9,22 @@ import java.util.*;
  * Created by Anthony on 26/03/14.
  */
 public class HashGenerator {
-    public static TreeSet<TupleDto> sortTuples(Collection<TupleDto> tuples) {
-        return new TreeSet<TupleDto>(tuples);
+    public static TreeSet<TuplePojo> sortTuples(Collection<TuplePojo> tuples) {
+        return new TreeSet<TuplePojo>(tuples);
     }
 
-    public static String generateFrontEndHash(TreeSet<TupleDto> sortedTuples) {
+    public static String generateFrontEndHash(TreeSet<TuplePojo> sortedTuples) {
         StringBuilder builder = new StringBuilder();
 
-        for (TupleDto tupleDto : sortedTuples) {
-            tupleToHash(builder, tupleDto.getVerb(), tupleDto.getNoun());
+        for (TuplePojo tuple : sortedTuples) {
+            toHashTuple(builder, tuple.getVerb(), tuple.getNoun());
         }
 
         return builder.toString();
     }
 
-    public static List<String> generateBackEndHashes(TreeSet<TupleDto> sortedTuples) {
-        TupleDto[] tupleArray = sortedTuples.toArray(new TupleDto[]{});
+    public static List<String> generateBackEndHashes(TreeSet<TuplePojo> sortedTuples) {
+        TuplePojo[] tupleArray = sortedTuples.toArray(new TuplePojo[]{});
 
         List<StringBuilder> startingList = new ArrayList<StringBuilder>();
         startingList.add(new StringBuilder());
@@ -40,7 +39,7 @@ public class HashGenerator {
         return output;
     }
 
-    private static List<StringBuilder> generateHashLevels(TupleDto[] tupleArray, List<StringBuilder> currentList, int level) {
+    private static List<StringBuilder> generateHashLevels(TuplePojo[] tupleArray, List<StringBuilder> currentList, int level) {
         if (level >= tupleArray.length) {
             return currentList;
         }
@@ -51,18 +50,45 @@ public class HashGenerator {
         for (StringBuilder stringBuilder : currentList) {
             if(hasNoun){
                 StringBuilder toAppendNoun = new StringBuilder(stringBuilder.toString());
-                tupleToHash(toAppendNoun, tupleArray[level].getVerb(), tupleArray[level].getNoun());
+                toHashTuple(toAppendNoun, tupleArray[level].getVerb(), tupleArray[level].getNoun());
                 withNounList.add(toAppendNoun);
             }
 
-            tupleToHash(stringBuilder, tupleArray[level].getVerb(), null);
+            toHashTuple(stringBuilder, tupleArray[level].getVerb(), null);
         }
 
         currentList.addAll(withNounList);
         return generateHashLevels(tupleArray, currentList, ++level);
     }
 
-    private static void tupleToHash(StringBuilder builder, String verb, String noun) {
+    public static TuplePojo unhashTuple(String hash) {
+        if(StringUtils.isBlank(hash) || !hash.endsWith("||")){
+            return null;
+        }
+
+        TuplePojo tuple = new TuplePojo();
+
+        String[] split = hash.split("@");
+        if(split.length == 2){
+            tuple.setVerb(split[0]);
+            tuple.setNoun(StringUtils.removeEnd(split[1], "||"));
+        }else if(split.length == 1){
+            tuple.setVerb(StringUtils.removeEnd(split[0], "||"));
+        }else{
+            return null;
+        }
+
+        return tuple;
+
+    }
+
+    public static String hashTuple(TuplePojo tuple) {
+        StringBuilder stringBuilder = new StringBuilder();
+        toHashTuple(stringBuilder, tuple.getVerb(), tuple.getNoun());
+        return stringBuilder.toString();
+    }
+
+    private static void toHashTuple(StringBuilder builder, String verb, String noun) {
         builder.append(verb);
         if (noun != null) {
             builder.append("@");
@@ -70,4 +96,6 @@ public class HashGenerator {
         }
         builder.append("||");
     }
+
+
 }

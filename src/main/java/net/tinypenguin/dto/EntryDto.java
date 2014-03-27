@@ -1,47 +1,94 @@
 package net.tinypenguin.dto;
 
-import net.tinypenguin.model.Location;
-import net.tinypenguin.model.User;
+import net.tinypenguin.logic.HashGenerator;
+import net.tinypenguin.model.Entry;
+import net.tinypenguin.model.LocationPojo;
+import net.tinypenguin.model.TuplePojo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Anthony on 26/03/14.
  */
 public class EntryDto {
 
-    private ArrayList<String> tuples = new ArrayList<String>();
+    private ArrayList<TuplePojo> tuples = new ArrayList<TuplePojo>();
 
-    private User user;
+    private UserDto userDto;
 
-    private Location location;
+    private LocationPojo location;
 
     public EntryDto() {
     }
 
 
-    public ArrayList<String> getTuples() {
+    public ArrayList<TuplePojo> getTuples() {
         return tuples;
     }
 
-    public void setTuples(ArrayList<String> tuples) {
+    public void setTuples(ArrayList<TuplePojo> tuples) {
         this.tuples = tuples;
     }
 
-    public User getUser() {
-        return user;
+    public UserDto getUserDto() {
+        return userDto;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
-    public Location getLocation() {
+    public LocationPojo getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(LocationPojo location) {
         this.location = location;
+    }
+
+    public static List<EntryDto> fromEntries(List<Entry> entries){
+        ArrayList<EntryDto> entryDtos = new ArrayList<EntryDto>();
+
+        if(entries == null){
+            return entryDtos;
+        }
+
+        for (Entry entry : entries) {
+            entryDtos.add(fromEntry(entry));
+        }
+
+        return entryDtos;
+    }
+
+    public static EntryDto fromEntry(Entry entry) {
+        EntryDto entryDto = new EntryDto();
+        entryDto.setUserDto(UserDto.fromUser(entry.getUser()));
+        entryDto.setLocation(entry.getLocation());
+        ArrayList<TuplePojo> tuples = new ArrayList<TuplePojo>();
+
+        for (String tupleHash : entry.getTuples()) {
+            tuples.add(HashGenerator.unhashTuple(tupleHash));
+        }
+
+        entryDto.setTuples(tuples);
+        return entryDto;
+    }
+
+    public Entry toEntry(List<String> backEndHashes){
+        Entry entry = new Entry();
+        entry.setLocation(location);
+        entry.setUser(userDto.toUser());
+        entry.setHashes(backEndHashes);
+
+        ArrayList<String> tupleHashes = new ArrayList<String>();
+        for (TuplePojo tuple : tuples) {
+            tupleHashes.add(HashGenerator.hashTuple(tuple));
+        }
+
+        entry.setTuples(tupleHashes);
+
+        return entry;
     }
 
 }

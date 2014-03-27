@@ -1,11 +1,11 @@
 package net.tinypenguin.model;
 
-public class Location {
+public class LocationPojo {
     private Long lat;
     private Long lng;
     private String address;
 
-    public Location() {
+    public LocationPojo() {
     }
 
     public Long getLat() {
@@ -30,14 +30,5 @@ public class Location {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    @Override
-    public String toString() {
-        return "Location{" +
-                "lat=" + lat +
-                ", lng=" + lng +
-                ", address='" + address + '\'' +
-                '}';
     }
 }

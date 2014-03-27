@@ -13,6 +13,7 @@ public class User {
 
     @ObjectId @Id
     private String id = new org.bson.types.ObjectId().toString();
+    private byte[] thumbnail = null;
 
     public User() {
     }
@@ -23,5 +24,13 @@ public class User {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public byte[] getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(byte[] thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

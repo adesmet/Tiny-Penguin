@@ -6,6 +6,7 @@ import net.tinypenguin.dao.UserDao;
 import net.tinypenguin.dto.EntryDto;
 import net.tinypenguin.json.Query;
 import net.tinypenguin.model.*;
+import net.tinypenguin.service.EntryService;
 import net.tinypenguin.service.KeywordService;
 import org.springframework.stereotype.Controller;
 
@@ -20,21 +21,24 @@ import java.util.List;
 @Controller
 @Path("tiny")
 public class TinyController {
+    //todo: remove entry daos
+    @Resource
+    EntryDao entryDao;
 
     @Resource
     UserDao userDao;
 
     @Resource
-    EntryDao entryDao;
+    EntryService entryService;
 
     @Resource
     KeywordService keywordService;
 
-    @POST
-    @Consumes("application/json")
-    @Produces("text/plain")
-    public int register(String uid, Query query) {
-        return keywordService.register(uid, query);
+    @GET
+    @Path("/delete")
+    public String deleteAll() {
+        entryDao.deleteAll();
+        return "All entries removed.";
     }
 
     @GET
@@ -48,9 +52,16 @@ public class TinyController {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/post")
-    public List<EntryDto> createTrackInJSON(EntryDto entryDto) {
+    @Path("/postNoSave")
+    public List<EntryDto> getEntries(EntryDto entryDto) {
+        return entryService.getEntriesWithoutSaving(entryDto);
+    }
 
-        return null;
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/post")
+    public List<EntryDto> postEntry(EntryDto entryDto) {
+        return entryService.processEntry(entryDto);
     }
 }
