@@ -14,6 +14,7 @@ public class Keywords {
     @ObjectId
     @Id
     private String id = new org.bson.types.ObjectId().toString();
+
     @DBRef
     private List<Keyword> keywords;
 

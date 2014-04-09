@@ -5,17 +5,16 @@ import net.tinypenguin.json.Query;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @Service
 public class KeywordServiceImpl implements KeywordService {
 
-//    @Resource
-//    private UserDao userDao;
-
     @Override
-    public int register(String userId, Query query) {
+    public HashMap<String,ArrayList<String>> fetchKeywords() {
 
-        return 42;
+        return null;
     }
 
 }

@@ -20,8 +20,8 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@Path("tiny")
-public class TinyController {
+@Path("activity")
+public class ActivityController {
     //todo: remove entry daos
     @Resource
     EntryDao entryDao;

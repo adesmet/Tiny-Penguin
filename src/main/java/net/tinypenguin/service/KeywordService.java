@@ -2,6 +2,9 @@ package net.tinypenguin.service;
 
 import net.tinypenguin.json.Query;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public interface KeywordService {
-    int register(String userId, Query query);
+    HashMap<String,ArrayList<String>> fetchKeywords();
 }
