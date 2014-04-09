@@ -19,19 +19,19 @@
     <mongo:repositories base-package="net.tinypenguin"/>
 
     <mongo:db-factory
-            id="mongoDbFactory"
-            dbname="db"
-            host="localhost"
-            port="27017"/>
+    id="mongoDbFactory"
+    dbname="db"
+    host="localhost"
+    port="27017"/>
 
 
     <!--<mongo:db-factory-->
-    <!--id="mongoDbFactory"-->
-    <!--dbname="db"-->
-    <!--host="10.0.52.188"-->
-    <!--port="25360"-->
-    <!--username="6480c74f-24d8-4e3e-8240-c986e6597eca"-->
-    <!--password="79c0c61f-a853-4687-8f47-dfeef35571db"/>-->
+            <!--id="mongoDbFactory"-->
+            <!--dbname="db"-->
+            <!--host="10.0.52.188"-->
+            <!--port="25360"-->
+            <!--username="6480c74f-24d8-4e3e-8240-c986e6597eca"-->
+            <!--password="79c0c61f-a853-4687-8f47-dfeef35571db"/>-->
 
 
 </beans>
