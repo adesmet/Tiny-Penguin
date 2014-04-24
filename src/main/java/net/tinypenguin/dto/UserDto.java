@@ -8,10 +8,10 @@ import java.util.List;
 public class UserDto {
     private String id;
 
+    private byte[] thumbnail = null;
+
     public UserDto() {
     }
-
-    private byte[] thumbnail = null;
 
     public String getId() {
         return id;

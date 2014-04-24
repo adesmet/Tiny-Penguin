@@ -4,28 +4,19 @@ package net.tinypenguin.controller;
 import net.tinypenguin.dao.EntryDao;
 import net.tinypenguin.dao.UserDao;
 import net.tinypenguin.dto.EntryDto;
-import net.tinypenguin.json.Query;
-import net.tinypenguin.model.*;
+import net.tinypenguin.model.User;
 import net.tinypenguin.service.EntryService;
 import net.tinypenguin.service.KeywordService;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @Path("activity")
@@ -71,7 +62,43 @@ public class ActivityController {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/post")
     public List<EntryDto> postEntry(EntryDto entryDto) {
-        return entryService.processEntry(entryDto);
+        List<EntryDto> entryDtos = entryService.processEntry(entryDto);
+
+        //TODO add test images
+        for (EntryDto dto : entryDtos) {
+            dto.getUserDto().setThumbnail(getUserImage());
+        }
+
+        return entryDtos;
+    }
+
+    //TODO test method
+    private byte[] getUserImage() {
+        ByteArrayOutputStream bais = new ByteArrayOutputStream();
+        InputStream is = null;
+        try {
+            String image = "http://img.pandawhale.com/55294-easter-egg-meme-BYo0.jpeg";
+            URL url = new URL(image);
+            is = url.openStream();
+            byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
+            int n;
+
+            while ((n = is.read(byteChunk)) > 0) {
+                bais.write(byteChunk, 0, n);
+            }
+            return bais.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try {
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
     @GET
