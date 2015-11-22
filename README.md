@@ -74,3 +74,11 @@ Tiny Penguin
 	          ""$$$$$o                oooo$$$$$$$$$$$$$$ooo
 	             "$$$$$$ooooooo     """""""""$$$""""$$o   ""
 	                                                  "
+
+Backend service which is able to process verb and nouns and to reply with how many other users are using those verbs and nouns.
+Possible verbs and nouns can be fetched using the KeywordController.
+Activities can be fetched/entered using the ActivityController.
+
+To run:
+- mvn clean install
+- tomcat7 plugin: run
